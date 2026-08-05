@@ -28,3 +28,9 @@ class Solution:
             if not cur.left and not cur.right and cur.val == remain:
                 return True
             remain -= cur.val
+            if cur.left:
+                queue.append((cur.left,remain))
+            if cur.right:
+                queue.append((cur.right,remain))
+        return False
+
