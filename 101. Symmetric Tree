@@ -4,7 +4,7 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-# Solution1: Recursive(DFS)
+# Solution 1: Recursive(DFS)
 class Solution:
     def isSymmetric(self, root: Optional[TreeNode]) -> bool:
         def is_mirror(left,right):
@@ -15,7 +15,7 @@ class Solution:
             return is_mirror(left.left,right.right) and is_mirror(left.right,right.left)
         return is_mirror(root.left,root.right)
 
-# Solution2: BFS
+# Solution 2: BFS
 class Solution:
     def isSymmetric(self, root: Optional[TreeNode]) -> bool:
 
