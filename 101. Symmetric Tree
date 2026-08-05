@@ -4,20 +4,21 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+# Solution1: Recursive(DFS)
 class Solution:
     def isSymmetric(self, root: Optional[TreeNode]) -> bool:
         def is_mirror(left,right):
             if not left and not right:
                 return True
-            if not left or not right or left.val!=right.val:
+            if not left or not right or left.val != right.val:
                 return False
             return is_mirror(left.left,right.right) and is_mirror(left.right,right.left)
         return is_mirror(root.left,root.right)
 
+# Solution2: BFS
 class Solution:
     def isSymmetric(self, root: Optional[TreeNode]) -> bool:
-        if not root:
-            return False
+
         queue=deque([root.left,root.right])
         while queue:
             left=queue.popleft()
