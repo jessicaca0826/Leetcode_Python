@@ -4,6 +4,7 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+# Solution 1: DFS
 class Solution:
     def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
         if not root:
@@ -22,4 +23,25 @@ class Solution:
             path.pop()
 
         hit_target(root,targetSum,[]) 
+        return res
+
+# Solution 2: BFS
+class Solution:
+    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
+        if not root:
+            return []
+        
+        res=[]
+        queue=deque([(root,[],targetSum)])
+        while queue:
+            cur,path,remain=queue.popleft()
+            path.append(cur.val)
+            if not cur.left and not cur.right and cur.val==remain:
+                res.append(path)
+            remain-=cur.val
+            if cur.left:
+                queue.append((cur.left,path,remain))
+
+            if cur.right:
+                queue.append((cur.right,path,remain))
         return res
