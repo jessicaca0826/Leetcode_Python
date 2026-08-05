@@ -8,25 +8,18 @@ class Solution:
     def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
         if not root:
             return []
-        
-        def hit_target(node,route,remain):
+
+        res=[]
+        def hit_target(node,remain,path):
+            path.append(node.val)
             if not node.left and not node.right and node.val==remain:
-                return route+[node.val]
-            
-            if not node.left and not node.right:
-                return []
-
-            res=route+[node.val]
+                res.append(path[:])
             remain-=node.val
-
-            result=[]
             if node.left:
-                left_route=hit_target(node.left,res,remain)
-                if left_route:
-                    result.append(left_route)
+                hit_target(node.left,remain,path)
             if node.right:
-                right_route=hit_target(node.right,res,remain)
-                if right_route:
-                    result.append(right_route)
-            return result
-        return hit_target(root,[],targetSum)
+                hit_target(node.right,remain,path)
+            path.pop()
+
+        hit_target(root,targetSum,[]) 
+        return res
