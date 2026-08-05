@@ -4,7 +4,7 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-# Solution1: DFS
+# Solution 1: DFS
 class Solution:
     def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
         if not root:
@@ -16,7 +16,7 @@ class Solution:
         remain = targetSum - root.val
         
         return self.hasPathSum(root.left,remain) or self.hasPathSum(root.right,remain)
-# Solution2: BFS
+# Solution 2: BFS
 class Solution:
     def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
         if not root:
