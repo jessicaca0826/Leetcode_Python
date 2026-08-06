@@ -21,28 +21,26 @@ def num_univalue_tree(root):
     if not root:
         return 0
     
-    result=0
+    count=0
+
     def is_unival_tree(node):
-        nonlocal result
+        nonlocal count
+
         if not node:
             return True
-        if not node.left and not node.right:
-            result+=1
-            return True
         
-        left=is_unival_tree(node.left)
-        right=is_unival_tree(node.right)
+        is_left_unival=is_unival_tree(node.left)
+        is_right_unival=is_unival_tree(node.right)
         
-        if left and right:
-            if node.left and node.right:
-                if node.left.val==node.val and node.right.val==node.val:
-                    result+=1
-            elif node.left:
-                result+=1
-            elif node.right:
-                result+=1
+        if not is_left_unival or not is_right_unival:
+            return False
+        if node.left and node.val!=node.left.val:
+            return False
+        if node.right and node.val!=node.right.val:
+            return False
+        
+        count+=1
+        return True
 
     is_unival_tree(root)
-    return result
-
-print(num_univalue_tree(node1))
+    return count
