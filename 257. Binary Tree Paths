@@ -15,7 +15,7 @@ class Solution:
         def path_record(node,path):
             path.append(str(node.val))
             if not node.left and not node.right:
-                path_str='->'.join(path[:])
+                path_str='->'.join(path)
                 res.append(path_str)
             
             if node.left:
