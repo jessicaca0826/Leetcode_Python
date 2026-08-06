@@ -1,0 +1,48 @@
+class Node:
+    def __init__(self,val,left=None,right=None):
+        self.val=val
+        self.left=left
+        self.right=right
+
+node1=Node(5)
+node2=Node(1)
+node3=Node(5)
+node4=Node(5)
+node5=Node(5)
+node6=Node(5)
+
+node1.left=node2
+node1.right=node3
+node2.left=node4
+node2.right=node5
+node3.right=node6
+
+def num_univalue_tree(root):
+    if not root:
+        return 0
+    
+    result=0
+    def is_unival_tree(node):
+        nonlocal result
+        if not node:
+            return True
+        if not node.left and not node.right:
+            result+=1
+            return True
+        
+        left=is_unival_tree(node.left)
+        right=is_unival_tree(node.right)
+        
+        if left and right:
+            if node.left and node.right:
+                if node.left.val==node.val and node.right.val==node.val:
+                    result+=1
+            elif node.left:
+                result+=1
+            elif node.right:
+                result+=1
+
+    is_unival_tree(root)
+    return result
+
+print(num_univalue_tree(node1))
