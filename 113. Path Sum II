@@ -35,13 +35,13 @@ class Solution:
         queue=deque([(root,[],targetSum)])
         while queue:
             cur,path,remain=queue.popleft()
-            path.append(cur.val)
+            new_path=path+[cur.val]
             if not cur.left and not cur.right and cur.val==remain:
-                res.append(path)
+                res.append(new_path)
             remain-=cur.val
             if cur.left:
-                queue.append((cur.left,path,remain))
+                queue.append((cur.left,new_path,remain))
 
             if cur.right:
-                queue.append((cur.right,path,remain))
+                queue.append((cur.right,new_path,remain))
         return res
